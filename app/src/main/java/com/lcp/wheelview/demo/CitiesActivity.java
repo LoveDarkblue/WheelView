@@ -9,49 +9,58 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lcp.wheelview.R;
+import com.wheelview.widget.IWheelView;
 import com.wheelview.widget.OnWheelChangedListener;
 import com.wheelview.widget.OnWheelScrollListener;
 import com.wheelview.widget.WheelView;
 import com.wheelview.widget.adapters.AbstractWheelTextAdapter;
 import com.wheelview.widget.adapters.ArrayWheelAdapter;
 
-public class CitiesActivity extends Activity {
+public class CitiesActivity extends Activity implements OnWheelChangedListener {
     // Scrolling flag
     private boolean scrolling = false;
+    private WheelView city;
+    private WheelView country;
+    private String[][] cities;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.cities_layout);
-                
-        final WheelView country = (WheelView) findViewById(R.id.country);
+
+        country = (WheelView) findViewById(R.id.country);
         country.setVisibleItems(3);
         country.setViewAdapter(new CountryAdapter(this));
 
-        final String cities[][] = new String[][] {
+        cities = new String[][] {
         		new String[] {"New York", "Washington", "Chicago", "Atlanta", "Orlando"},
         		new String[] {"Ottawa", "Vancouver", "Toronto", "Windsor", "Montreal"},
         		new String[] {"Kiev", "Dnipro", "Lviv", "Kharkiv"},
         		new String[] {"Paris", "Bordeaux"},
         		};
-        
-        final WheelView city = (WheelView) findViewById(R.id.city);
-        city.setVisibleItems(5);
 
-        country.addChangingListener(new OnWheelChangedListener() {
-			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-			    if (!scrolling) {
-			        updateCities(city, cities, newValue);
-			    }
-			}
-		});
-        
-        country.addScrollingListener( new OnWheelScrollListener() {
-            public void onScrollingStarted(WheelView wheel) {
+        city = (WheelView) findViewById(R.id.city);
+        city.setVisibleItems(5);
+        city.addChangingListener(this);
+        country.addChangingListener(this);
+        /*country.addChangingListener(new OnWheelChangedListener() {
+            @Override
+            public void onChanged(IWheelView wheel, int oldValue, int newValue) {
+                if (!scrolling) {
+                    updateCities(city, cities, newValue);
+                }
+            }
+        });*/
+
+        country.addScrollingListener(new OnWheelScrollListener() {
+            @Override
+            public void onScrollingStarted(IWheelView wheel) {
                 scrolling = true;
             }
-            public void onScrollingFinished(WheelView wheel) {
+
+            @Override
+            public void onScrollingFinished(IWheelView wheel) {
                 scrolling = false;
                 updateCities(city, cities, country.getCurrentItem());
             }
@@ -70,7 +79,19 @@ public class CitiesActivity extends Activity {
         city.setViewAdapter(adapter);
         city.setCurrentItem(cities[index].length / 2);        
     }
-    
+
+    @Override
+    public void onChanged(IWheelView wheel, int oldValue, int newValue) {
+        if (wheel == city) {
+            System.out.println("city changed");
+        } else if (wheel == country) {
+            System.out.println("country changed");
+            if (!scrolling) {
+                updateCities(city, cities, newValue);
+            }
+        }
+    }
+
     /**
      * Adapter for countries
      */

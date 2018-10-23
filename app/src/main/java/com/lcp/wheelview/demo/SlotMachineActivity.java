@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lcp.wheelview.R;
+import com.wheelview.widget.IWheelView;
 import com.wheelview.widget.OnWheelChangedListener;
 import com.wheelview.widget.OnWheelScrollListener;
 import com.wheelview.widget.WheelView;
@@ -50,10 +51,10 @@ public class SlotMachineActivity extends Activity {
     
     // Wheel scrolled listener
     OnWheelScrollListener scrolledListener = new OnWheelScrollListener() {
-        public void onScrollingStarted(WheelView wheel) {
+        public void onScrollingStarted(IWheelView wheel) {
             wheelScrolled = true;
         }
-        public void onScrollingFinished(WheelView wheel) {
+        public void onScrollingFinished(IWheelView wheel) {
             wheelScrolled = false;
             updateStatus();
         }
@@ -61,7 +62,7 @@ public class SlotMachineActivity extends Activity {
     
     // Wheel changed listener
     private OnWheelChangedListener changedListener = new OnWheelChangedListener() {
-        public void onChanged(WheelView wheel, int oldValue, int newValue) {
+        public void onChanged(IWheelView wheel, int oldValue, int newValue) {
             if (!wheelScrolled) {
                 updateStatus();
             }

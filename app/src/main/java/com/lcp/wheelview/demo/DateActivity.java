@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lcp.wheelview.R;
+import com.wheelview.widget.IWheelView;
 import com.wheelview.widget.OnWheelChangedListener;
 import com.wheelview.widget.WheelView;
 import com.wheelview.widget.adapters.ArrayWheelAdapter;
@@ -29,7 +30,7 @@ public class DateActivity extends Activity {
         final WheelView day = (WheelView) findViewById(R.id.day);
         
         OnWheelChangedListener listener = new OnWheelChangedListener() {
-            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+            public void onChanged(IWheelView wheel, int oldValue, int newValue) {
                 updateDays(year, month, day);
             }
         };

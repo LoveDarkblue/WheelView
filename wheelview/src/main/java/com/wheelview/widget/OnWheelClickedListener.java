@@ -28,5 +28,5 @@ public interface OnWheelClickedListener {
      * @param wheel the wheel view
      * @param itemIndex the index of clicked item
      */
-    void onItemClicked(WheelView wheel, int itemIndex);
+    void onItemClicked(IWheelView wheel, int itemIndex);
 }

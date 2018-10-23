@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TimePicker;
 
 import com.lcp.wheelview.R;
+import com.wheelview.widget.IWheelView;
 import com.wheelview.widget.OnWheelChangedListener;
 import com.wheelview.widget.OnWheelClickedListener;
 import com.wheelview.widget.OnWheelScrollListener;
@@ -52,7 +53,7 @@ public class TimeActivity extends Activity {
 		addChangingListener(hours, "hour");
 	
 		OnWheelChangedListener wheelListener = new OnWheelChangedListener() {
-			public void onChanged(WheelView wheel, int oldValue, int newValue) {
+			public void onChanged(IWheelView wheel, int oldValue, int newValue) {
 				if (!timeScrolled) {
 					timeChanged = true;
 					picker.setCurrentHour(hours.getCurrentItem());
@@ -65,7 +66,7 @@ public class TimeActivity extends Activity {
 		mins.addChangingListener(wheelListener);
 		
 		OnWheelClickedListener click = new OnWheelClickedListener() {
-            public void onItemClicked(WheelView wheel, int itemIndex) {
+            public void onItemClicked(IWheelView wheel, int itemIndex) {
                 wheel.setCurrentItem(itemIndex, true);
             }
         };
@@ -73,10 +74,10 @@ public class TimeActivity extends Activity {
         mins.addClickingListener(click);
 
 		OnWheelScrollListener scrollListener = new OnWheelScrollListener() {
-			public void onScrollingStarted(WheelView wheel) {
+			public void onScrollingStarted(IWheelView wheel) {
 				timeScrolled = true;
 			}
-			public void onScrollingFinished(WheelView wheel) {
+			public void onScrollingFinished(IWheelView wheel) {
 				timeScrolled = false;
 				timeChanged = true;
 				picker.setCurrentHour(hours.getCurrentItem());
@@ -105,7 +106,7 @@ public class TimeActivity extends Activity {
 	 */
 	private void addChangingListener(final WheelView wheel, final String label) {
 		wheel.addChangingListener(new OnWheelChangedListener() {
-			public void onChanged(WheelView wheel, int oldValue, int newValue) {
+			public void onChanged(IWheelView wheel, int oldValue, int newValue) {
 				//wheel.setLabel(newValue != 1 ? label + "s" : label);
 			}
 		});

@@ -17,11 +17,12 @@
  *  limitations under the License.
  */
 
-package com.wheelview.widget;
+package com.lcp.wheelview;
 
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
@@ -33,6 +34,13 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import com.wheelview.R;
+import com.wheelview.widget.IWheelView;
+import com.wheelview.widget.ItemsRange;
+import com.wheelview.widget.OnWheelChangedListener;
+import com.wheelview.widget.OnWheelClickedListener;
+import com.wheelview.widget.OnWheelScrollListener;
+import com.wheelview.widget.WheelRecycle;
+import com.wheelview.widget.WheelScroller;
 import com.wheelview.widget.adapters.WheelViewAdapter;
 
 import java.util.LinkedList;
@@ -43,7 +51,7 @@ import java.util.List;
  * 
  * @author Yuri Kanivets
  */
-public class WheelView extends View implements IWheelView{
+public class WheelView2 extends View implements IWheelView{
 
 	/** Top and bottom shadows colors */
 	private static final int[] SHADOWS_COLORS = new int[] { 0xFF111111,
@@ -60,10 +68,10 @@ public class WheelView extends View implements IWheelView{
 
 	// Wheel Values
 	private int currentItem = 0;
-	
+
 	// Count of visible items
 	private int visibleItems = DEF_VISIBLE_ITEMS;
-	
+
 	// Item height
 	private int itemHeight = 0;
 
@@ -76,21 +84,21 @@ public class WheelView extends View implements IWheelView{
 
 	// Scrolling
 	private WheelScroller scroller;
-    private boolean isScrollingPerformed; 
+    private boolean isScrollingPerformed;
     private int scrollingOffset;
 
 	// Cyclic
 	boolean isCyclic = false;
-	
+
 	// Items layout
 	private LinearLayout itemsLayout;
-	
+
 	// The number of first item in layout
 	private int firstItem;
 
 	// View adapter
 	private WheelViewAdapter viewAdapter;
-	
+
 	// Recycle
 	private WheelRecycle recycle = new WheelRecycle(this);
 
@@ -102,7 +110,7 @@ public class WheelView extends View implements IWheelView{
 	/**
 	 * Constructor
 	 */
-	public WheelView(Context context, AttributeSet attrs, int defStyle) {
+	public WheelView2(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initData(context);
 	}
@@ -110,7 +118,7 @@ public class WheelView extends View implements IWheelView{
 	/**
 	 * Constructor
 	 */
-	public WheelView(Context context, AttributeSet attrs) {
+	public WheelView2(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initData(context);
 	}
@@ -118,7 +126,7 @@ public class WheelView extends View implements IWheelView{
 	/**
 	 * Constructor
 	 */
-	public WheelView(Context context) {
+	public WheelView2(Context context) {
 		super(context);
 		initData(context);
 	}
@@ -416,7 +424,7 @@ public class WheelView extends View implements IWheelView{
             scrollingOffset = 0;
         } else if (itemsLayout != null) {
             // cache all items
-	        recycle.recycleItems(itemsLayout, firstItem, new ItemsRange());         
+	        recycle.recycleItems(itemsLayout, firstItem, new ItemsRange());
         }
         
         invalidate();
@@ -438,7 +446,8 @@ public class WheelView extends View implements IWheelView{
 			bottomShadow = new GradientDrawable(Orientation.BOTTOM_TOP, SHADOWS_COLORS);
 		}
 
-		setBackgroundResource(R.drawable.wheel_bg);
+//		setBackgroundResource(R.drawable.wheel_bg);
+		setBackgroundColor(Color.TRANSPARENT);
 	}
 	
 	/**
@@ -558,10 +567,10 @@ public class WheelView extends View implements IWheelView{
 	        updateView();
 
 	        drawItems(canvas);
-	        drawCenterRect(canvas);
+//	        drawCenterRect(canvas);
 		}
 		
-        drawShadows(canvas);
+//        drawShadows(canvas);
 	}
 
 	/**

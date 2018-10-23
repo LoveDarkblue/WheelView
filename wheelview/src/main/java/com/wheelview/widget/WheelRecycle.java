@@ -36,13 +36,13 @@ public class WheelRecycle {
 	private List<View> emptyItems;
 	
 	// Wheel view
-	private WheelView wheel;
+	private IWheelView wheel;
 	
 	/**
 	 * Constructor
 	 * @param wheel the wheel view
 	 */
-	public WheelRecycle(WheelView wheel) {
+	public WheelRecycle(IWheelView wheel) {
 		this.wheel = wheel;
 	}
 

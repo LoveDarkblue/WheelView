@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.lcp.wheelview.R;
+import com.wheelview.widget.IWheelView;
 import com.wheelview.widget.OnWheelChangedListener;
 import com.wheelview.widget.WheelView;
 import com.wheelview.widget.adapters.ArrayWheelAdapter;
@@ -38,7 +39,7 @@ public class SpeedActivity extends Activity {
         
         units.addChangingListener(new OnWheelChangedListener() {
             @Override
-            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+            public void onChanged(IWheelView wheel, int oldValue, int newValue) {
                 String value = unitsValues[units.getCurrentItem()];
                 speedAdapter.setUnits(" " + value);
                 speed.invalidateWheel(false);
