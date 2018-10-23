@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lcp.wheelview">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".demo.WheelDemo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.CitiesActivity" android:label="Cities">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.DateActivity" android:label="Date">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.PasswActivity" android:label="password">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.SlotMachineActivity" android:label="SlotMachine">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.SpeedActivity" android:label="speed">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.Time2Activity" android:label="time2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".demo.TimeActivity" android:label="time">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
