@@ -77,6 +77,8 @@ public class WheelView2 extends View implements IWheelView{
 
 	// Center Line
 	private Drawable centerDrawable;
+	private Drawable focusDrawable;
+	private Drawable selectDrawable;
 
 	// Shadows drawables
 	private GradientDrawable topShadow;
@@ -137,6 +139,21 @@ public class WheelView2 extends View implements IWheelView{
 	 */
 	private void initData(Context context) {
 	    scroller = new WheelScroller(getContext(), scrollingListener);
+		setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					setCenterDrawable(focusDrawable);
+				}else {
+					setCenterDrawable(selectDrawable);
+				}
+				invalidate();
+			}
+		});
+	}
+
+	private void setCenterDrawable(Drawable centerDrawable) {
+		this.centerDrawable = centerDrawable;
 	}
 	
 	// Scrolling listener
@@ -175,7 +192,18 @@ public class WheelView2 extends View implements IWheelView{
             }
         }
     };
-	
+
+	public void setFocusDrawable(Drawable focusDrawable) {
+		this.focusDrawable = focusDrawable;
+	}
+
+	public void setSelectDrawable(Drawable selectDrawable) {
+		this.selectDrawable = selectDrawable;
+		if (null == centerDrawable) {
+			centerDrawable = selectDrawable;
+		}
+	}
+
 	/**
 	 * Set the the specified scrolling interpolator
 	 * @param interpolator the interpolator
@@ -566,8 +594,8 @@ public class WheelView2 extends View implements IWheelView{
 		if (viewAdapter != null && viewAdapter.getItemsCount() > 0) {
 	        updateView();
 
+	        drawCenterRect(canvas);
 	        drawItems(canvas);
-//	        drawCenterRect(canvas);
 		}
 		
 //        drawShadows(canvas);

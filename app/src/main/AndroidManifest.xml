@@ -57,6 +57,12 @@
                 <category android:name="wheel.WHEEL_SAMPLE"/>
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" android:label="live">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="wheel.WHEEL_SAMPLE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
